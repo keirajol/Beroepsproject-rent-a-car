@@ -1,21 +1,53 @@
+
 body {
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin: 0;
 }
+
+/*--- navbar ---*/
 .navbar {
     width: 100%;
     height: 250px;
     background-color: #0d2440;
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
 }
+
+#logo-navbar {
+    height: 100px;
+    margin-top: 75px;
+    margin-left: 150px;
+}
+
+.navbar-links a {
+    color: #b78700;
+    font-size: 20px;
+    text-decoration: none;
+    padding-left: 45px;
+    padding-right: 45px;
+    margin-right: 80px;
+    
+}
+
+.navbar-links {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 115px;
+    margin-left: 80px;
+    height: 10px;
+}
+
+/*--- Homepage body ---*/
 
 .homepage-body {
     width: 100%;
     height: 650px;
 }
+
 
 #homepage-pic {
     width: 100%;
