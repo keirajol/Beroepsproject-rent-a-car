@@ -5,4 +5,7 @@
     <RootNamespace>Beroepsproject_Rent\A\Car</RootNamespace>
     <WebRoot />
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="BackEnd\" />
+  </ItemGroup>
 </Project>
