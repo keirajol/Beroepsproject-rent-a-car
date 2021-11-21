@@ -13,9 +13,9 @@
             <div class="navbar">
                 <img id="logo-navbar" src="../IMG/Logo-2.png" alt="[LOGO]">
                 <div class="navbar-links">
-                <a href="">Reserveer hier</a>
-                <a href="">Contact</a>
-                <a href="">Inloggen</a>
+                <a href="/Reserveren.php">Reserveer hier</a>
+                <a href="/Contact.php">Contact</a>
+                <a href="/Login.php">Inloggen</a>
                 </div>
             </div>
         </nav>
