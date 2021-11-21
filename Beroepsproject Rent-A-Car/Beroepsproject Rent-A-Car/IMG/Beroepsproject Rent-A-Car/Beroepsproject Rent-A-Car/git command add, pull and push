@@ -1,0 +1,1 @@
+git add -A && git commit -am "Uitwerking van de exercise" && git push
