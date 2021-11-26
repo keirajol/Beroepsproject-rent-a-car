@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <head>
-        <title></title>
-        <?php
-        require('../OOP/DatabaseConnection.php');
-        $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "roots", "");
-        $dbConnect->connect();
+    <title></title>
+    <?php
+    require('../OOP/DatabaseConnection.php');
+    $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "root", "");
+    $dbConnect->connect();
 
-        require('../OOP/LayoutConventions.php');
-        $getLayout = new LayoutConventions();
-        ?>
-    </head>
+    require('../OOP/LayoutConventions.php');
+    $getLayout = new LayoutConventions();
+    ?>
 </head>
 <body>
     <?php

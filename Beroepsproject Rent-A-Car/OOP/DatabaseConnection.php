@@ -21,7 +21,6 @@ class DatabaseConnection
             $dsn = "mysql:host=$this->host;dbname=$this->dbname";
             $conn = new PDO($dsn, $this->user, $this->pass);
             $conn;
-            throw new PDOException("Failed to connect");
         }
         catch (PDOException $ex)
         {

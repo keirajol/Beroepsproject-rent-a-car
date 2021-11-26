@@ -1,6 +1,11 @@
 <?php
 class LayoutConventions
 {
+    public function __construct()
+    {
+        echo '<link rel="stylesheet" href="../Header-Footer/Header-Footer.css" />';
+    }
+
     public function getNavbarHead()
     {
         echo '<nav>
@@ -22,7 +27,7 @@ class LayoutConventions
             <div class="navbar">
                 <img id="logo-navbar" src="../IMG/Logo-2.png" alt="[LOGO]">
                 <div class="navbar-links">
-                
+
                 </div>
             </div>
         </nav>';
