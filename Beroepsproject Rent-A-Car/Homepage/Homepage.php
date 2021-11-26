@@ -16,12 +16,14 @@
     </head>
     <body>
         <?php
-        $getLayout->getNavbar();
+        $getLayout->getNavbarHead();
         ?>
         <div class="homepage-body">
         <button id="Reserveer-knop" type="button">Reserveer nu!!</button>
         <img id="homepage-pic" src="../IMG/multicars-juist.jpg">
         </div>
-
+        <?php
+        $getLayout->getNavbarFoot();
+        ?>
     </body>
 </html>
