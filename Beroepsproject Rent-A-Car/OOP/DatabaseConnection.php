@@ -5,6 +5,10 @@ class DatabaseConnection
     private string $dbname;
     private string $user;
     private string $pass;
+    private string $id;
+
+    private string $table = 'klanten';
+    private PDO $connection;
 
     public function __construct(string $host, string $dbname, string $user, string $pass)
     {
@@ -19,12 +23,87 @@ class DatabaseConnection
         try
         {
             $dsn = "mysql:host=$this->host;dbname=$this->dbname";
-            $conn = new PDO($dsn, $this->user, $this->pass);
-            $conn;
+            $this->connection = new PDO($dsn, $this->user, $this->pass);
         }
         catch (PDOException $ex)
         {
             echo $ex->getMessage();
         }
+    }
+
+    private function validateUser(string $user)
+    {
+        if (strlen(trim($user)) == 0)
+        {
+            throw new Exception('Geef een usernaam op');
+        }
+    }
+
+    private function validatePassword(string $password)
+    {
+        if (strlen(trim($password)) == 0)
+        {
+            throw new Exception('Geef een wachtwoord op');
+        }
+    }
+
+    private function checkPassword(string $user, string $password) : bool
+    {
+        $statement = $this->connection->Prepare
+                ("select password from $this->table where gebruikersnaam like :gebruikersnaam");
+        $statement->execute(
+            [
+              ":gebruikersnaam" => $user
+            ]);
+        $result = $statement->fetch();
+        return $result != null && password_verify($password,$result['password']);
+    }
+
+    private function validateRepeatedPassword(string $password, string $repeatedPassword)
+    {
+        if (trim($password) != trim($repeatedPassword))
+        {
+            throw new Exception('Wachtwoorden moeten hetzelfde zijn');
+        }
+    }
+
+    private function checkIfUserExists(string $user)
+    {
+        $statement = $this->connection->Prepare("select * from $this->table where gebruikersnaam = :gebruikersnaam");
+        $statement->execute([":gebruikersnaam" => $user]);
+        if ($statement->fetch() == 1)
+        {
+            throw new Exception("Gebruiker $user bestaat al!");
+        }
+    }
+
+    public function getUsername()
+    {
+        $this->id = $_GET['id'];
+        $statement = $this->connect->prepare("select * from $this->table where $this->id = :id");
+        $statement->setFetchMode(PDO::FETCH_CLASS, 'DatabaseConnection');
+        $statement->execute([":id" => $this->id]);
+        while($row = $statement->fetch())
+        {
+            echo $row->gebruikersnaam;
+        }
+    }
+
+    public function createUser(string $user, string $email, string $password, string $repeatedPassword)
+    {
+        $this->validateUser($user);
+        $this->validatePassword($user);
+        $this->validateRepeatedPassword($password, $repeatedPassword);
+        $this->checkIfUserExists($user);
+
+        $statement = $this->connection->Prepare(
+        "INSERT INTO $this->table (gebruikersnaam, email, wachtwoord) values (:gebruikersnaam, :email, :wachtwoord)");
+        $statement->execute(
+            [
+                ":gebruikersnaam" => trim($user),
+                ":email" => trim($email),
+                ":wachtwoord" => password_hash(trim($password), PASSWORD_DEFAULT)
+            ]);
+        header("Location: ../RegistreerKlant/message.newUser.php"   );
     }
 }
