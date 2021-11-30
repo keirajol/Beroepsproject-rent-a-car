@@ -5,7 +5,6 @@ class DatabaseConnection
     private string $dbname;
     private string $user;
     private string $pass;
-    private string $id;
 
     private string $table = 'klanten';
     private PDO $connection;
@@ -29,6 +28,13 @@ class DatabaseConnection
         {
             echo $ex->getMessage();
         }
+    }
+
+    public function Login(string $user, $password) : bool
+    {
+        $this->ValidateUser($user);
+        $this->ValidatePassword($password);
+        return $this->CheckPassword($user, $password);
     }
 
     private function validateUser(string $user)
@@ -77,18 +83,6 @@ class DatabaseConnection
         }
     }
 
-    public function getUsername()
-    {
-        $this->id = $_GET['id'];
-        $statement = $this->connect->prepare("select * from $this->table where $this->id = :id");
-        $statement->setFetchMode(PDO::FETCH_CLASS, 'DatabaseConnection');
-        $statement->execute([":id" => $this->id]);
-        while($row = $statement->fetch())
-        {
-            echo $row->gebruikersnaam;
-        }
-    }
-
     public function createUser(string $user, string $email, string $password, string $repeatedPassword)
     {
         $this->validateUser($user);
@@ -104,6 +98,6 @@ class DatabaseConnection
                 ":email" => trim($email),
                 ":wachtwoord" => password_hash(trim($password), PASSWORD_DEFAULT)
             ]);
-        header("Location: ../RegistreerKlant/message.newUser.php"   );
+        header("Location: ../RegistreerKlant/inloggen.klant.php");
     }
 }

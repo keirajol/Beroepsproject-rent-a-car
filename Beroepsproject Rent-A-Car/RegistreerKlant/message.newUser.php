@@ -14,7 +14,9 @@
     <?php
     $getLayout->getNavbarHead();
     ?>
-    <h1>Welkom <?php $dbConnect->getUsername(); ?></h1>
+    <h1>
+        Welkom gebruiker!
+    </h1>
     <?php
         $getLayout->getNavbarFoot();
     ?>
