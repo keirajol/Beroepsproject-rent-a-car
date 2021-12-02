@@ -39,33 +39,38 @@ session_start();
                     <a href="registreren.klant.php">Nieuwe gebruiker</a>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <?php
+                    if (isset($_POST['login']))
+                    {
+                        try
+                        {
+                            $user = $_POST['user'];
+                            if ($dbConnect->Login($user, $_POST['password']))
+                            {
+                                header("Location: message.newUser.php");
+                                $_SESSION['user'] = $user;
+                            }
+                            else
+                            {
+                                echo 'ongeldig user id of wachtwoord<br/>';
+                                unset( $_SESSION['user']);
+                            }
+                        }
+
+                        catch (Exception $ex)
+                        {
+                            echo $ex->getMessage() . "<br/>";
+                        }
+                    }
+                    ?>
+                </td>
+            </tr>
         </table>
     </form>
+    <?php
+    $getLayout->getNavbarFoot();
+    ?>
 </body>
 </html>
-<?php
-$getLayout->getNavbarFoot();
-
-if (isset($_POST['login']))
-{
-    try
-    {
-        $user = $_POST['user'];
-        if ($dbConnect->Login($user, $_POST['password']))
-        {
-            header("Location: message.newUser.php");
-            $_SESSION['user'] = $user;
-        }
-        else
-        {
-            echo 'ongeldig user id of wachtwoord<br/>';
-            unset( $_SESSION['user']);
-        }
-    }
-
-    catch (Exception $ex)
-    {
-        echo $ex->getMessage() . "<br/>";
-    }
-}
-?>

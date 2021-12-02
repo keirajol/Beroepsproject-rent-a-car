@@ -30,7 +30,7 @@ class DatabaseConnection
         }
     }
 
-    public function Login(string $user, $password) : bool
+    public function Login(string $user, string $password) : bool
     {
         $this->ValidateUser($user);
         $this->ValidatePassword($password);
@@ -56,7 +56,7 @@ class DatabaseConnection
     private function checkPassword(string $user, string $password) : bool
     {
         $statement = $this->connection->Prepare
-                ("select password from $this->table where gebruikersnaam like :gebruikersnaam");
+                ("select $password from $this->table where $user like :gebruikersnaam");
         $statement->execute(
             [
               ":gebruikersnaam" => $user
