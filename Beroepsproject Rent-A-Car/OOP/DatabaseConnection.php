@@ -56,11 +56,11 @@ class DatabaseConnection
     private function checkPassword(string $user, string $password) : bool
     {
         $statement = $this->connection->Prepare
-                ("select $password from $this->table where $user like :gebruikersnaam");
-        $statement->execute(
-            [
-              ":gebruikersnaam" => $user
-            ]);
+                ("select wachtwoord = :wachtwoord, gebruikersnaam = :gebruikersnaam from $this->table");
+        $statement->execute([
+            ':wachtwoord' => $password,
+            ':gebruikersnaam' => $user
+              ]);
         $result = $statement->fetch();
         return $result != null && password_verify($password,$result['password']);
     }
