@@ -1,10 +1,10 @@
 <?php
-    require_once ('LoginController.php');
+  /*  require_once ('LoginController.php');
     session_start();
 ?>
 
 
-<head>
+<!--<head>
     <title>Nieuwe gebruiker maken</title>
 </head>
 <body>
@@ -46,7 +46,7 @@
                 </td>
             </tr>
         </table>
-    </form>
+    </form> -->
 <?php
 if (isset($_POST['newUser']))
 {
