@@ -2,7 +2,7 @@
 
 
 
-echo nl2br("Damian zijn hoofd is kaolo groot");
+echo "Damian zijn hoofd is kaolo groot";
 session_start();
 unset($_SESSION['user']);
 

@@ -1,12 +1,20 @@
 <?php
-require_once ('LoginController.php');
 session_start();
 ?>
 
 
 <!DOCTYPE html>
+<html>
 <head>
     <title>Inlogpagina</title>
+    <?php
+    require('../OOP/DatabaseConnection.php');
+    $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "root", "");
+    $dbConnect->connect();
+
+    require_once ('../OOP/UserController.php');
+    $loginController = new UserController()
+    ?>
 </head>
 <body>
     <form action="index.php" method="post">
@@ -41,7 +49,6 @@ if (isset($_POST['login']))
     try
     {
         $user = $_POST['user'];
-        $loginController = new LoginController();
         if ($loginController->Login($user, $_POST['password']))
         {
             header("Location: redirect.php");
@@ -59,9 +66,5 @@ if (isset($_POST['login']))
         echo $ex->getMessage() . "<br/>";
     }
 }
-
-
-
-
 ?> 
 </html>

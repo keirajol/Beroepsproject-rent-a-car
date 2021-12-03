@@ -11,6 +11,9 @@ session_start();
     $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "root", "");
     $dbConnect->connect();
 
+    require('../OOP/DatabaseConnection.php');
+    $loginController = new UserController();
+
     require('../OOP/LayoutConventions.php');
     $getLayout = new LayoutConventions();
     ?>
@@ -33,7 +36,7 @@ session_start();
         {
             try
             {
-                $dbConnect->createUser($_POST['Gebruikersnaam'], $_POST['Email'], $_POST['Wachtwoord'], $_POST['HerhaalWachtwoord']);
+                $loginController->createUser($_POST['Gebruikersnaam'], $_POST['Email'], $_POST['Wachtwoord'], $_POST['HerhaalWachtwoord']);
             } catch(Exception $e)
             {
                 $e->getMessage() . "<br>";
