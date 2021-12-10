@@ -54,7 +54,7 @@ h2 {
     cursor: pointer;
 }
 
-.reserveren a:hover {
+.reserveren button:hover {
     background-color: white;
     color: black;
 }
