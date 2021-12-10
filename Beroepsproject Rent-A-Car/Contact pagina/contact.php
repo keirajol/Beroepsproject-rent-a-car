@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width">
     <title>Contact</title>
     <link href="Contact.css" rel="stylesheet" type="text/css" />
+    <?php
+        require('../OOP/DatabaseConnection.php');
+        $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "root", "");
+        $dbConnect->connect();
+
+        require('../OOP/LayoutConventions.php');
+        $getLayout = new LayoutConventions();
+        ?>
   </head>
   <body>
+    <?php
+    $getLayout->getNavbarHead();
+    ?>
     <div class="box1"><h1>Kom met ons in contact!</h1>
   <p>Contact:</br>
     +31 85 001 2614</br>
@@ -31,5 +42,9 @@ De missie van Rent-A-Car is om onze klanten de beste service en producten aan te
     <style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:800px;}</style>
     </div>
     </div>
+
+    <?php
+    $getLayout->getNavbarFoot();
+    ?>
   </body>
 </html>
