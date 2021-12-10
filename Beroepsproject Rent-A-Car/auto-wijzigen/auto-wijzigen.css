@@ -1,0 +1,16 @@
+﻿.section {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #0D2440;
+    border: 2px solid #B78700;
+    width: 800px;
+    padding: 30px;
+    margin: 30px;
+    color: #B78700
+}
