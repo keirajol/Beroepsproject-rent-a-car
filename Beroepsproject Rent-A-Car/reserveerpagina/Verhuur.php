@@ -15,7 +15,6 @@
         ?>
     </head>
     <body>
-
     <?php
     $getLayout->getNavbarHead();
     ?>

@@ -1,17 +1,19 @@
 <?php
+require_once('../OOP/DatabaseConnection.php');
 class UserController
 {
     private string $table ="klanten";
+    private string $user;
 
-    public function Login(string $user, $password) : bool
+    public function login(string $user, $password) : bool
     {
-        $this->ValidateUser($user);
-        $this->ValidatePassword($password);
-        return $this->CheckPassword($user, $password);
+        $this->validateUser($user);
+        $this->validatePassword($password);
+        return $this->checkPassword($user, $password);
     }
 
 
-    private function ValidateUser(string $user)
+    private function validateUser(string $user)
     {
         if (strlen(trim($user)) == 0)
         {
@@ -19,7 +21,7 @@ class UserController
         }
     }
 
-    private function ValidatePassword(string $password)
+    private function validatePassword(string $password)
     {
         if (strlen(trim($password)) == 0)
         {
@@ -28,36 +30,18 @@ class UserController
     }
 
     // password controller
-    private function CheckPassword(string $user, string $password) : bool
+    private function checkPassword(string $password) : bool
     {
         $statement = $this->connection->Prepare
-                ("select password from $this->table where id like :id");
-        $statement->execute(
-            [
-              ":id" => $user
+                ("select wachtwoord from $this->table where wachtwoord = :password");
+        $statement->execute([
+              ':password' => $password
             ]);
         $result = $statement->fetch();
         return $result != null && password_verify($password,$result['password']);
     }
 
-    public function CreateUser(string $user, string $password, string $repeatedPassword, string $fullName, string $email)
-    {
-        $this->ValidateUser($user);
-        $this->ValidatePassword($user);
-        $this->ValidateRepeatedPassword($password, $repeatedPassword);
-        $this->CheckIfUserExists($user);
-
-        $statement = $this->connection->Prepare("insert into $this->table (name, password, email) values (:name, :password, :email)");
-        $statement->execute(
-            [":id" => trim($user),
-             ":password" => password_hash(trim($password), PASSWORD_DEFAULT),
-             ":name" => trim($fullName),
-             ":email" => trim($email)
-             ]);
-    }
-
-    private function ValidateRepeatedPassword(string $password,
-                                              string $repeatedPassword)
+    private function validateRepeatedPassword(string $password,string $repeatedPassword)
     {
         if (trim($password) != trim($repeatedPassword))
         {
@@ -65,14 +49,31 @@ class UserController
         }
     }
 
-    private function CheckIfUserExists(string $user)
+    private function checkIfUserExists()
     {
         $statement =
-          $this->connection->Prepare("select 1 from $this->table where id = :id");
-        $statement->execute([":id" => $user]);
+          $this->connection->Prepare("select gebruikersnaam from $this->table like $this->user = :username");
+        $statement->execute([":username" => $this->user]);
         if ($statement->fetch() == 1)
         {
-            throw new Exception("User $user bestaat al!");
+            throw new Exception("User $this->user bestaat al!");
         }
+    }
+
+    public function createUser(string $user, string $password, string $repeatedPassword, string $email)
+    {
+        $this->user = $user;
+        $this->validateUser($this->user);
+        $this->validatePassword($password);
+        $this->validateRepeatedPassword($password, $repeatedPassword);
+        $this->checkIfUserExists();
+
+        $statement = $this->connection->Prepare("insert into $this->table (gebruikersnaam, wachtwoord, email) values (:name, :password, :email)");
+        $statement->execute(
+            [
+                ':name' => $this->user,
+                ':password' => $password,
+                ':email' => $email
+            ]);
     }
 }
