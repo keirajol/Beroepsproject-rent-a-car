@@ -40,7 +40,8 @@ class UserController
         return $result != null && password_verify($password,$result['password']);
     }
 
-    public function CreateUser(string $user, string $email, string $password, string $repeatedPassword)
+    public function CreateUser(string $user, string $password,
+                               string $repeatedPassword, string $fullName, string $email)
     {
         $this->ValidateUser($user);
         $this->ValidatePassword($user);
@@ -48,11 +49,12 @@ class UserController
         $this->CheckIfUserExists($user);
 
         $statement = $this->connection->Prepare(
-            "insert into $this->table (gebruikersnaam, wachtwoord, email wachtwoord) values (:gebruikersnaam, :wachtwoord, :email)");
-        $statement->execute([
-            ":" => trim($user),
-            ":password" => password_hash(trim($password), PASSWORD_DEFAULT),
-            ":email" => trim($email)
+            "insert into $this->table (id, password, name, email) values (:id, :password, :name, :email)");
+        $statement->execute(
+            [":id" => trim($user),
+             ":password" => password_hash(trim($password), PASSWORD_DEFAULT),
+             ":name" => trim($fullName),
+             ":email" => trim($email)
              ]);
     }
 
