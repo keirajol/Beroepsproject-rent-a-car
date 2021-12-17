@@ -1,5 +1,5 @@
 <?php
-abstract class DatabaseConnection
+class DatabaseConnection
 {
     private string $host;
     private string $dbname;
