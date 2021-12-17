@@ -12,14 +12,15 @@
 }
 
 #plus {
-    height: 200px;
-    margin-top: 75px;
-    margin-left: 40px;  
+    height: 300px;
+    margin-top: 25px;
+    margin-left: 1px;  
 }
 
 .toevoegen {
     background-color: transparent;
     background-repeat: no-repeat;
+    border: none;
     cursor: pointer;
     overflow: hidden;
 }
