@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿body {
     display: flex;
     flex-direction: column;
@@ -5,26 +6,59 @@
     justify-content: space-evenly; 
     margin: 0;
     padding: 0;
+=======
+body {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-evenly;
+margin: 0;
+padding: 0;
+>>>>>>> Stashed changes
 }
 
 .box1 {
-    background-color: #0D2440;
-    border: 2px solid #B78700;
-    width: 800px;
-    padding: 30px;
-    margin: 30px;
-    color: #B78700
+  background-color: #0D2440;
+  border: 2px solid #B78700;
+  width: 800px;
+  padding: 30px;
+  margin: 30px;
+  color: #B78700
+
 }
 
 .box2 {
-    background-color: #0D2440;
-    width: 800px;
-    padding: 30px;
-    margin: 30px;
-    border: 2px solid #B78700;
-    color: #B78700
+  background-color: #0D2440;
+  width: 800px;
+  padding: 30px;
+  margin: 30px;
+  border: 2px solid #B78700;
+  color: #B78700
 }
 
 .mapouter {
-    border: 2px solid #b78700;
+  border: 2px solid #b78700;
+  position:relative;
+  text-align:right;
+  height:500px;
+  width: 800px;
 }
+
+.gmap_canvas {  
+  overflow:hidden;
+  background:none!important;
+  height:500px;
+  width:800px;
+}
+
+.mapouter { 
+  position:relative;
+  text-align:right;
+  height:500px;
+  width: 800px;
+}
+
+iframe {
+  width:100%;
+  height:100%;
+  }
