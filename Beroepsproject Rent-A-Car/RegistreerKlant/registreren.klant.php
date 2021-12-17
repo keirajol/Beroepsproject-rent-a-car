@@ -7,14 +7,14 @@ session_start();
 <head>
     <title></title>
     <?php
-    require('../OOP/DatabaseConnection.php');
+    require_once('../OOP/DatabaseConnection.php');
     $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "root", "");
     $dbConnect->connect();
 
-    require('../OOP/DatabaseConnection.php');
+    require_once('UserController.php');
     $loginController = new UserController();
 
-    require('../OOP/LayoutConventions.php');
+    require_once('../OOP/LayoutConventions.php');
     $getLayout = new LayoutConventions();
     ?>
 </head>
@@ -27,16 +27,16 @@ session_start();
         <input placeholder="Email" type="email" name="Email" required="required"/>
         <input placeholder="Wachtwoord" type="password" name="Wachtwoord" required="required"/>
         <input placeholder="Herhaal Wachtwoord" type="password" name="HerhaalWachtwoord" required="required"/>
-        <input type="submit" name="createUser" value="Registreren"/>
+        <input type="submit" name="submit" value="Registreren"/>
     </form>
     <?php
         $getLayout->getNavbarFoot();
 
-        if(isset($_POST['createUser']))
+        if(isset($_POST['submit']))
         {
             try
             {
-                $loginController->createUser($_POST['Gebruikersnaam'], $_POST['Email'], $_POST['Wachtwoord'], $_POST['HerhaalWachtwoord']);
+                $loginController->createUser($_POST['Gebruikersnaam'], $_POST['Wachtwoord'], $_POST['HerhaalWachtwoord'], $_POST['Email']);
             } catch(Exception $e)
             {
                 $e->getMessage() . "<br>";

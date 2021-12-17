@@ -11,6 +11,9 @@ session_start();
     $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "root", "");
     $dbConnect->connect();
 
+    require_once('../OOP/UserController.php');
+    $loginController = new UserController();
+
     require('../OOP/LayoutConventions.php');
     $getLayout = new LayoutConventions();
     ?>
@@ -47,7 +50,7 @@ session_start();
                         try
                         {
                             $user = $_POST['user'];
-                            if ($dbConnect->Login($user, $_POST['password']))
+                            if ($loginController->login($user, $_POST['password']))
                             {
                                 header("Location: message.newUser.php");
                                 $_SESSION['user'] = $user;
