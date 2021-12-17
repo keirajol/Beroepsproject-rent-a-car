@@ -1,0 +1,8 @@
+<Project Sdk="Devsense.Php.Sdk">
+  <PropertyGroup>
+    <EnvName>PHPDev</EnvName>
+    <RootNamespace>TestRentAcar</RootNamespace>
+    <WebRoot />
+    <RuntimeVersion>8.0</RuntimeVersion>
+  </PropertyGroup>
+</Project>
