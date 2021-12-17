@@ -50,17 +50,15 @@ class UserController
         $this->CheckIfUserExists($user);
 
         $statement = $this->connection->Prepare(
-            "insert into $this->table (id, password, name, email) values (:id, :password, :name, :email)");
-        $statement->execute(
-            [":id" => trim($user),
-             ":password" => password_hash(trim($password), PASSWORD_DEFAULT),
-             ":name" => trim($fullName),
-             ":email" => trim($email)
-             ]);
+            "insert into $this->table (gebruikersnaam, email, wachtwoord) values (:gebruikersnaam, :email, :wachtwoord)");
+        $statement->execute([
+            ':gebruikersnaam' => $user,
+            ':wachtwoord)' =>$password,
+            ':email' => $email
+        ]);
     }
 
-    private function ValidateRepeatedPassword(string $password,
-                                              string $repeatedPassword)
+    private function ValidateRepeatedPassword(string $password, string $repeatedPassword)
     {
         if (trim($password) != trim($repeatedPassword))
         {

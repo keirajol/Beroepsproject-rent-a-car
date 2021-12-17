@@ -5,8 +5,6 @@ class DatabaseConnection
     private string $dbname;
     private string $user;
     private string $pass;
-
-    private string $table = 'klanten';
     private PDO $connection;
 
     public function __construct(string $host, string $dbname, string $user, string $pass)
