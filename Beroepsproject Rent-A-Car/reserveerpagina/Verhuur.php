@@ -71,7 +71,7 @@
                 <div class="car-6">
                     <h2>2022 Porsche 718 Cayman GT4 RS</h2>
                     <img src="../IMG/porsche-718-cayman-gt4-rs-2022-651513.jpg" alt="porsche-FOTO" id="porsche_pic" class="cars">
-                    <p class="informatie">€2365,- per dag<br></p>
+                    <p class="informatie">€3165,- per dag<br></p>
                     <button class="reserveren" type="button">Reserveer hier</button>
                 </div>
                 </div>
