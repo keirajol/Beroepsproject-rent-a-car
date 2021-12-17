@@ -32,6 +32,7 @@
                 <img src="../IMG/bmw.jpg" alt="BMW-FOTO" id="bmw_pic" class="cars">
                 <p class="informatie">€2570,- per dag<br></p>
 
+                <a href=".."><button class="wijzig"><img src="../IMG/wijzig.png" alt="wijzig" class="wijzig"></button></a> 
                 <button class="reserveren" type="button">Reserveer hier</button>
             </div>
             </div>

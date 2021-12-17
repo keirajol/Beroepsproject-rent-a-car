@@ -1,10 +1,10 @@
 ﻿body {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly; 
-    margin: 0;
-    padding: 0;
+    justify-content: space-evenly;  */
+    /* margin: 0;
+    padding: 0; */
 }
 
 .box1 {
