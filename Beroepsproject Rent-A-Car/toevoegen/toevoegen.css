@@ -17,6 +17,31 @@
     margin-left: 1px;  
 }
 
+.wijzig {
+    height: 70px;
+}
+
+.wijzig-button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.prullebak {
+    height: 70px;
+    padding-left: 100px;
+}
+
+.prullebak-button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
 .toevoegen {
     background-color: transparent;
     background-repeat: no-repeat;
