@@ -36,7 +36,7 @@ class LayoutConventions
             <div class="navbar">
                 <img id="logo-navbar" src="../IMG/Logo-2.png" alt="[LOGO]">
                 <div class="navbar-links">
-                    <a href="../LoginMedewerker/index.php">Werkportaal<a/>
+                    <a href="../LoginMedewerker/login.php">Werkportaal<a/>
                 </div>
             </div>
         </nav>';

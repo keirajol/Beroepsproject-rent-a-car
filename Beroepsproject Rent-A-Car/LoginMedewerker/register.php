@@ -1,5 +1,8 @@
 <?php
 require_once ('../OOP/Database.php');
+require_once ('../OOP/LayoutConventions.php');
+
+$getLayout = new LayoutConventions();
 ?>
 
 <!DOCTYPE html>
@@ -8,6 +11,11 @@ require_once ('../OOP/Database.php');
     <title>Nieuwe gebruiker maken</title>
 </head>
 <body>
+    <?php
+    require_once('../OOP/LayoutConventions.php');
+    $getLayout = new LayoutConventions();
+    $getLayout->getNavbarHead();
+    ?>
     <form action="register.php" method="post">
         <table>
             <tr>
@@ -47,6 +55,9 @@ require_once ('../OOP/Database.php');
             </tr>
         </table>
     </form>
+    <?php
+    $getLayout->getNavbarFoot();
+    ?>
 </body>
 </html>
 
@@ -55,7 +66,7 @@ if (isset($_POST['newUser']))
 {
     try
     {
-        $loginController = new Database();
+        $loginController = new Database('employees');
         $loginController->CreateUser($_POST['user'], $_POST['password'], $_POST['repeatedPassword'], $_POST['userName'], $_POST['email']);
         header('Location: login.php');
     }

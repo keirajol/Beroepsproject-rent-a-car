@@ -2,15 +2,17 @@
 class Database
 {
     private PDO $connection;
-    private string $table = "users";
+    private string $table;
     private string $user;
 
-    public function __construct()
+    public function __construct($table = "")
     {
         $server = 'localhost';
         $database = 'netland';
         $user = 'root';
         $password = '';
+
+        $this->table = $table;
 
         $this->connection = new PDO("mysql:server=$server;dbname=$database", $user, $password);
         session_start();

@@ -43,7 +43,7 @@ if (isset($_POST['login']))
     try
     {
         $user = $_POST['user'];
-        $database = new Database();
+        $database = new Database('employees');
         if ($database->Login($user, $_POST['password']))
         {
             echo $_SESSION['user'] = $user;

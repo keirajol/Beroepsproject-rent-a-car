@@ -55,7 +55,7 @@ if (isset($_POST['newUser']))
 {
     try
     {
-        $loginController = new Database();
+        $loginController = new Database('users');
         $loginController->CreateUser($_POST['user'], $_POST['password'], $_POST['repeatedPassword'], $_POST['userName'], $_POST['email']);
         header('Location: login.php');
     }
