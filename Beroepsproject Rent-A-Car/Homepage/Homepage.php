@@ -5,11 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="Homepage.css"/>
         <?php
-        require('../OOP/DatabaseConnection.php');
-        $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "root", "");
-        $dbConnect->connect();
+        require_once('../OOP/Database.php');
+        $database = new Database();
 
-        require('../OOP/LayoutConventions.php');
+        require_once('../OOP/LayoutConventions.php');
         $getLayout = new LayoutConventions();
         ?>
         <title>Homepage</title>
