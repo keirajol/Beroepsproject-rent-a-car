@@ -1,14 +1,14 @@
 <?php
-  /*  require_once ('LoginController.php');
-    session_start();
+require_once ('../OOP/Database.php');
 ?>
 
-
-<!--<head>
+<!DOCTYPE html>
+<html>
+<head>
     <title>Nieuwe gebruiker maken</title>
 </head>
 <body>
-    <form action="NewUser.php" method="post">
+    <form action="register.php" method="post">
         <table>
             <tr>
                 <td>Gebruiker</td>
@@ -46,17 +46,18 @@
                 </td>
             </tr>
         </table>
-    </form> -->
+    </form>
+</body>
+</html>
+
 <?php
 if (isset($_POST['newUser']))
 {
     try
     {
-        $loginController = new LoginController();
-        $loginController->CreateUser($_POST['user'], $_POST['password'], 
-                                     $_POST['repeatedPassword'],
-                                     $_POST['userName'], $_POST['email']);
-        echo 'Gebruiker opgeslagen<br/>';
+        $loginController = new Database();
+        $loginController->CreateUser($_POST['user'], $_POST['password'], $_POST['repeatedPassword'], $_POST['userName'], $_POST['email']);
+        header('Location: login.php');
     }
     catch (Exception $ex)
     {
@@ -64,6 +65,3 @@ if (isset($_POST['newUser']))
     }
 }
 ?>
-
-
-</body>

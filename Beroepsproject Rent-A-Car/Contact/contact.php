@@ -10,11 +10,10 @@
     
     <?php
                 
-      require('../OOP/DatabaseConnection.php');
-      $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "root", "");
-      $dbConnect->connect();
+      require_once('../OOP/Database.php');
+      $database = new Database();
         
-      require('../OOP/LayoutConventions.php');
+      require_once('../OOP/LayoutConventions.php');
       $getLayout = new LayoutConventions();
                 
     ?>
@@ -46,7 +45,7 @@ De missie van Rent-A-Car is om onze klanten de beste service en producten aan te
     <br>
     <a href="https://www.embedgooglemap.net">google Maps</a>
 
-    <?php
+        <?php
         $getLayout->getNavbarFoot();
         ?>
     

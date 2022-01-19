@@ -1,13 +1,16 @@
-<?php
-require_once ('../OOP/Database.php');
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Inlogpagina</title>
+    <?php
+    require_once ('../OOP/Database.php');
+    require_once ('../OOP/LayoutConventions.php');
+
+    $getLayout = new LayoutConventions();
+    ?>
 </head>
 <body>
+    <?php $getLayout->getNavbarHead() ?>
     <form action="login.php" method="post">
         <table>
             <tr>
@@ -30,6 +33,7 @@ require_once ('../OOP/Database.php');
             </tr>
         </table>
     </form>
+    <?php $getLayout->getNavbarFoot() ?>
 </body>
 </html>
 

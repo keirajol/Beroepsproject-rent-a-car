@@ -14,8 +14,8 @@ class LayoutConventions
                 <div class="navbar-links">
                 <a href=' . "../Homepage/Homepage.php" . '>Home</a>
                 <a href=' . "../Reserveren/Reserveren.php" . '>Reserveer hier</a>
-                <a href=' . "../Contact/Contact.php" . '>Contact</a>
-                <a href=' . "../Login/Login.php" . '>Inloggen</a>
+                <a href=' . "../Contact/contact.php" . '>Contact</a>
+                <a href=' . "../LoginKlant/login.php" . '>Inloggen</a>
                 <div>' . $_SESSION['user'] . '</div>
                 <div>
                     <form action="#" method="post">
@@ -36,7 +36,7 @@ class LayoutConventions
             <div class="navbar">
                 <img id="logo-navbar" src="../IMG/Logo-2.png" alt="[LOGO]">
                 <div class="navbar-links">
-
+                    <a href="../LoginMedewerker/index.php">Werkportaal<a/>
                 </div>
             </div>
         </nav>';

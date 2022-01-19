@@ -6,6 +6,6 @@
     <WebRoot />
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="BackEnd\" />
+    <Content Remove="BackEnd\**" />
   </ItemGroup>
 </Project>

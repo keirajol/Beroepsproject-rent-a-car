@@ -1,23 +1,17 @@
-<?php
-session_start();
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Inlogpagina</title>
     <?php
-    require('../OOP/DatabaseConnection.php');
-    $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "root", "");
-    $dbConnect->connect();
+    require_once ('../OOP/Database.php');
+    require_once ('../OOP/LayoutConventions.php');
 
-    require_once ('../OOP/UserController.php');
-    $loginController = new UserController()
+    $getLayout = new LayoutConventions();
     ?>
 </head>
 <body>
-    <form action="index.php" method="post">
+    <?php $getLayout->getNavbarHead() ?>
+    <form action="login.php" method="post">
         <table>
             <tr>
                 <td>Gebruiker</td>
@@ -34,25 +28,26 @@ session_start();
             <tr>
                 <td colspan="2">
                     <input type="submit" name="login" value="Login" />
-                    <!--<a href="NewUser.php">Nieuwe gebruiker</a> -->
+                    <a href="register.php">Nieuwe gebruiker</a>
                 </td>
             </tr>
         </table>
     </form>
+    <?php $getLayout->getNavbarFoot() ?>
 </body>
+</html>
+
 <?php
-
-
-
 if (isset($_POST['login']))
 {
     try
     {
         $user = $_POST['user'];
-        if ($loginController->Login($user, $_POST['password']))
+        $database = new Database();
+        if ($database->Login($user, $_POST['password']))
         {
-            header("Location: redirect.php");
-            $_SESSION['user'] = $user;
+            echo $_SESSION['user'] = $user;
+            header('Location: welcome.php');
         }
         else
         {
@@ -66,5 +61,4 @@ if (isset($_POST['login']))
         echo $ex->getMessage() . "<br/>";
     }
 }
-?> 
-</html>
+?>

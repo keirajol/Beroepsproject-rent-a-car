@@ -29,6 +29,16 @@
     margin-right: 80px;
 }
 
+.navbar-links div {
+    color: #b78700;
+    font-size: 12px;
+    text-decoration: none;
+    padding-left: 45px;
+    padding-right: 45px;
+    margin-right: 80px;
+    font-weight: bold;
+}
+
 .navbar-links {
     display: flex;
     justify-content: space-between;
