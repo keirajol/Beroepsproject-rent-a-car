@@ -18,7 +18,7 @@
         $getLayout->getNavbarHead();
         ?>
         <div class="homepage-body">
-            <button id="Reserveer-knop" type="button">Reserveer nu!!</button>
+            <a href="../reserveerpagina/Verhuur.php" id="Reserveer-knop" type="button">Reserveer nu!!</a>
         </div>
         <?php
         $getLayout->getNavbarFoot();

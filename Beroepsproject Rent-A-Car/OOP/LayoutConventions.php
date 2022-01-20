@@ -8,7 +8,7 @@ class LayoutConventions
 
     public function getNavbarHead()
     {
-        echo '<nav>
+        echo '<nav class="head">
             <div class="navbar">
                 <img id="logo-navbar" src="../IMG/Logo-2.png" alt="[LOGO]">
                 <div class="navbar-links">
@@ -32,7 +32,7 @@ class LayoutConventions
 
     public function getNavbarFoot()
     {
-        echo '<nav>
+        echo '<nav class="foot">
             <div class="navbar">
                 <img id="logo-navbar" src="../IMG/Logo-2.png" alt="[LOGO]">
                 <div class="navbar-links">

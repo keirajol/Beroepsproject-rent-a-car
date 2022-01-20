@@ -5,12 +5,11 @@
         <link rel="stylesheet" href="verhuur.css">
         <?php
                 
-                require('../OOP/DatabaseConnection.php');
-                $dbConnect = new DatabaseConnection("localhost", "rent_a_car", "root", "");
-                $dbConnect->connect();
+        require_once('../OOP/Database.php');
+        $dbConnect = new Database();
         
-                require('../OOP/LayoutConventions.php');
-                $getLayout = new LayoutConventions();
+        require_once('../OOP/LayoutConventions.php');
+        $getLayout = new LayoutConventions();
                 
         ?>
     </head>
