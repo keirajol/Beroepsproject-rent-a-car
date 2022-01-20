@@ -13,7 +13,7 @@ class LayoutConventions
                 <img id="logo-navbar" src="../IMG/Logo-2.png" alt="[LOGO]">
                 <div class="navbar-links">
                 <a href=' . "../Homepage/Homepage.php" . '>Home</a>
-                <a href=' . "../Reserveren/Reserveren.php" . '>Reserveer hier</a>
+                <a href=' . "../Reserveren/Verhuur.php" . '>Reserveer hier</a>
                 <a href=' . "../Contact/contact.php" . '>Contact</a>
                 <a href=' . "../LoginKlant/login.php" . '>Inloggen</a>
                 <div>' . $_SESSION['user'] . $_SESSION['employee'] . '</div>

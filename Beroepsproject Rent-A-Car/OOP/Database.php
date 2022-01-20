@@ -87,4 +87,45 @@ class Database
              ":email" => trim($email)
              ]);
     }
+
+    public function getCarTable()
+    {
+        $statement = $this->connection->prepare(
+            "SELECT * FROM $this->table"
+            );
+        $statement->execute();
+        while($row = $statement->fetch())
+        {
+            echo "<div class='auto-blokken'>
+                    <div class='car-1'>
+                        <h2>" . $row['year_of_production'] . " " . $row['brand'] . " " . $row['model'] . "</h2>
+                        <img src=" . $row['image'] . " alt='BMW-FOTO' id='bmw_pic' class='cars'>
+                        <p class='informatie'>" . "&euro;" . $row['price_per_day'] . ",- per dag<br></p>
+
+                        <a href=ReserveringAuto.php? id = " . $row['id'] . " class='reserveren' type='button'>Reserveer hier</a>
+                    </div>
+                </div>"
+            ;
+        }
+    }
+
+    public function getUserReservation($id)
+    {
+        $statement = $this->connection->prepare(
+            "SELECT name, email FROM $this->table WHERE id = :id"
+            );
+        $statement->execute([
+            ':id' => $id
+            ]);
+        while($row = $statement->fetch())
+        {
+            echo '<form action="ReserveringAuto.php" method ="POST">
+            <input type="text" name="Naam" placeholder="Naam" value=' . $row['name'] . '><br><br>
+            <input type="email" name="Naam" placeholder="Email" value=' . $row['email'] . '><br><br>
+
+            <input type="submit" value="Reserveer">
+        </form>'
+            ;
+        }
+    }
 }
