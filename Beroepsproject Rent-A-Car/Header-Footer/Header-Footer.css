@@ -10,7 +10,7 @@
     height: 250px;
     background-color: #0d2440;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: row;
 }
 
@@ -24,8 +24,8 @@
     color: #b78700;
     font-size: 20px;
     text-decoration: none;
-    padding-left: 45px;
-    padding-right: 45px;
+    padding-left: 25px;
+    padding-right: 25px;
     margin-right: 80px;
 }
 

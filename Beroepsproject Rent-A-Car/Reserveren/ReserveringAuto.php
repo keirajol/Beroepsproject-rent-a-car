@@ -13,7 +13,8 @@
     <body>
         <?php
         $getLayout->getNavbarHead();
-        $database->getUserReservation($_SESSION['user']);
+        $database-> getId($_GET['id']);
+        $database->getUserReservation($_SESSION['user'], 'cars');
         $getLayout->getNavbarFoot();
         ?>
     </body>

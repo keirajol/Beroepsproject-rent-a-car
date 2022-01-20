@@ -4,6 +4,7 @@ class Database
     private PDO $connection;
     private string $table;
     private string $user;
+    private string $id;
 
     public function __construct($table = "")
     {
@@ -102,30 +103,109 @@ class Database
                         <img src=" . $row['image'] . " alt='BMW-FOTO' id='bmw_pic' class='cars'>
                         <p class='informatie'>" . "&euro;" . $row['price_per_day'] . ",- per dag<br></p>
 
-                        <a href=ReserveringAuto.php? id = " . $row['id'] . " class='reserveren' type='button'>Reserveer hier</a>
+                        <a href=ReserveringAuto.php?id=" . $row['id'] . " class='reserveren' type='button'>Reserveer hier</a>
                     </div>
                 </div>"
             ;
         }
     }
 
-    public function getUserReservation($id)
+    public function getId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function __toString()
+    {
+        return $this->id;
+    }
+
+    public function getUserReservation(string $idCustomer,  string $table)
     {
         $statement = $this->connection->prepare(
-            "SELECT name, email FROM $this->table WHERE id = :id"
+            "SELECT * FROM $table WHERE id = :id"
             );
         $statement->execute([
-            ':id' => $id
+            ':id' => $this->id
             ]);
         while($row = $statement->fetch())
         {
-            echo '<form action="ReserveringAuto.php" method ="POST">
-            <input type="text" name="Naam" placeholder="Naam" value=' . $row['name'] . '><br><br>
-            <input type="email" name="Naam" placeholder="Email" value=' . $row['email'] . '><br><br>
+            echo "
+            <div>
+                <h2>" . $row['year_of_production'] . " " . $row['brand'] . " " . $row['model'] . "</h2>
+                <img src=" . $row['image'] . " alt='BMW-FOTO' id='bmw_pic' class='cars'>
+                <p class='informatie'>" . "&euro;" . $row['price_per_day'] . ",- per dag<br></p>
+                " . $row['amount'] . " Beshikbaar
+            </div>";
 
-            <input type="submit" value="Reserveer">
-        </form>'
-            ;
+            $statement = $this->connection->prepare(
+            "SELECT name, email FROM $this->table WHERE id = :id"
+            );
+            $statement->execute([
+                ':id' => $idCustomer
+                ]);
+            while($row = $statement->fetch())
+            {
+                echo '<form action="ReserveringAuto.php" method ="POST">
+                        <input type="text" name="Naam" placeholder="Naam" value=' . $row['name'] . '><br><br>
+                        <input type="email" name="Naam" placeholder="Email" value=' . $row['email'] . '><br><br>
+
+                        <input type="submit" value="Reserveer">
+                    </form>';
+                if(isset($_POST['submit']))
+                {
+                    header('Location: Bon.php');
+                }
+            }
         }
+    }
+
+    public function getUsername(string $name)
+    {
+        $statement = $this->connection->prepare(
+            "SELECT users.name FROM $this->table INNER JOIN users ON $this->table.customer_id = users.id WHERE users.name = :name)"
+            );
+        $statement->execute([
+            ':name' => $name
+            ]);
+        while($row = $statement->fetch())
+        {
+            echo "
+            <div>
+                <h2>Bon van Reservering</h2>
+                <ul class='informatie'>
+                    <li>" . $row['name'] . "</li>
+                </ul>
+            </div>";
+        }
+    }
+
+    public function getCarDetails(int $car)
+    {
+        $statement = $this->connection->prepare(
+            "SELECT cars.brand, cars.year_of_production, cars.model FROM $this->table INNER JOIN cars ON $this->table.cars_id = cars.id WHERE cars.id = :car)"
+            );
+        $statement->execute([
+            ':car' => $car
+            ]);
+        while($row = $statement->fetch())
+        {
+            echo "
+            <div>
+                <h2>Bon van Reservering</h2>
+                <ul class='informatie'>
+                    <li>" . $row['brand'] . "</li>
+                    <li>" . $row['year_of_production'] . "</li>
+                    <li>" . $row['model'] . "</li>
+                </ul>
+            </div>";
+        }
+    }
+
+    public function getReceipt($name, $car)
+    {
+        $this->getUsername($name);
+        $this->getCarDetails($car);
+
     }
 }

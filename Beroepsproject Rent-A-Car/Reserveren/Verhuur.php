@@ -6,7 +6,7 @@
         <?php    
         require_once('../OOP/Database.php');
         $database = new Database('cars');
-        
+        $id = $_GET['id'];
         require_once('../OOP/LayoutConventions.php');
         $getLayout = new LayoutConventions();
         ?>
