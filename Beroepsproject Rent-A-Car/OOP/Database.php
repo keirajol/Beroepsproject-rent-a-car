@@ -100,7 +100,7 @@ class Database
             echo "<div class='auto-blokken'>
                     <div class='car-1'>
                         <h2>" . $row['year_of_production'] . " " . $row['brand'] . " " . $row['model'] . "</h2>
-                        <img src=" . $row['image'] . " alt='BMW-FOTO' id='bmw_pic' class='cars'>
+                        <img src=" . $row['image'] . " alt='FOTO' id='bmw_pic' class='cars'>
                         <p class='informatie'>" . "&euro;" . $row['price_per_day'] . ",- per dag<br></p>
 
                         <a href=ReserveringAuto.php?id=" . $row['id'] . " class='reserveren' type='button'>Reserveer hier</a>
@@ -147,14 +147,17 @@ class Database
             while($row = $statement->fetch())
             {
                 echo '<form action="ReserveringAuto.php" method ="POST">
-                        <input type="text" name="Naam" placeholder="Naam" value=' . $row['name'] . '><br><br>
-                        <input type="email" name="Naam" placeholder="Email" value=' . $row['email'] . '><br><br>
+                        <input type="text" name="Name" placeholder="Naam" value=' . $row['name'] . 'required="required"><br><br>
+                        <input type="email" name="Email" placeholder="Email" value=' . $row['email'] . 'required="required"><br><br>
 
                         <input type="submit" value="Reserveer">
                     </form>';
                 if(isset($_POST['submit']))
                 {
-                    header('Location: Bon.php');
+                    if (isset($_POST['Name'], $_POST['Name']))
+                    {
+                        header('Location: Bon.php');
+                    }
                 }
             }
         }
@@ -206,6 +209,5 @@ class Database
     {
         $this->getUsername($name);
         $this->getCarDetails($car);
-
     }
 }
