@@ -16,7 +16,7 @@ class LayoutConventions
                 <a href=' . "../Reserveren/Reserveren.php" . '>Reserveer hier</a>
                 <a href=' . "../Contact/contact.php" . '>Contact</a>
                 <a href=' . "../LoginKlant/login.php" . '>Inloggen</a>
-                <div>' . $_SESSION['user'] . '</div>
+                <div>' . $_SESSION['user'] . $_SESSION['employee'] . '</div>
                 <div>
                     <form action="#" method="post">
                         <input type="submit" name="logout" value="Log Out" />
@@ -27,6 +27,7 @@ class LayoutConventions
         if(isset($_POST['logout']))
         {
             unset($_SESSION['user']);
+            unset($_SESSION['employee']);
         }
     }
 

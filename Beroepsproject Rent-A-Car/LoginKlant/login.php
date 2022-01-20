@@ -47,6 +47,7 @@ if (isset($_POST['login']))
         if ($database->Login($user, $_POST['password']))
         {
             echo $_SESSION['user'] = $user;
+            unset($_SESSION['employee']);
             header('Location: welcome.php');
         }
         else

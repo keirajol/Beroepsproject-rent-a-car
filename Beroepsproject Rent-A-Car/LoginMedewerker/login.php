@@ -16,7 +16,7 @@
             <tr>
                 <td>Gebruiker</td>
                 <td>
-                    <input type="text" name="user" />
+                    <input type="text" name="employee" />
                 </td>
             </tr>
             <tr>
@@ -42,17 +42,18 @@ if (isset($_POST['login']))
 {
     try
     {
-        $user = $_POST['user'];
+        $employee = $_POST['employee'];
         $database = new Database('employees');
-        if ($database->Login($user, $_POST['password']))
+        if ($database->Login($employee, $_POST['password']))
         {
-            echo $_SESSION['user'] = $user;
+            echo $_SESSION['employee'] = $employee;
+            unset($_SESSION['user']);
             header('Location: welcome.php');
         }
         else
         {
             echo 'ongeldig user id of wachtwoord<br/>';
-            unset( $_SESSION['user']);
+            unset($_SESSION['employee']);
         }
     }
 
