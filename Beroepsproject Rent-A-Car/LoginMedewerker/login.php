@@ -46,9 +46,17 @@ if (isset($_POST['login']))
         $database = new Database('employees');
         if ($database->Login($employee, $_POST['password']))
         {
-            echo $_SESSION['employee'] = $employee;
-            unset($_SESSION['user']);
-            header('Location: welcome.php');
+            
+            if ($_SESSION['employee'] == 'employee')
+            {
+                echo $_SESSION['employee'] = $employee;
+                unset($_SESSION['user']);
+                header('Location: admin.php');
+            }
+            else
+            {
+                header('Location: user.php');
+            }
         }
         else
         {
