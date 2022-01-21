@@ -46,22 +46,14 @@ if (isset($_POST['login']))
         $database = new Database('employees');
         if ($database->Login($employee, $_POST['password']))
         {
-            
-            if ($_SESSION['employee'] == 'employee')
-            {
-                echo $_SESSION['employee'] = $employee;
-                unset($_SESSION['user']);
-                header('Location: admin.php');
-            }
-            else
-            {
-                header('Location: user.php');
-            }
+            $_SESSION['employee'] = $employee;
+            unset($_SESSION['user']);
+            header('Location: admin.php');
         }
         else
         {
             echo 'ongeldig user id of wachtwoord<br/>';
-            unset($_SESSION['employee']);
+            unset( $_SESSION['user']);
         }
     }
 

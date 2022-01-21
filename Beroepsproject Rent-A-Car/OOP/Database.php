@@ -4,7 +4,6 @@ class Database
     private PDO $connection;
     private string $table;
     private string $user;
-    private string $id;
 
     public function __construct($table = "")
     {
@@ -50,7 +49,7 @@ class Database
               ":id" => $user
             ]);
         $result = $statement->fetch();
-        return $result != null && password_verify($password,$result['password']);
+        return $result != null && password_verify($password, $result['password']);
     }
 
     private function ValidateRepeatedPassword(string $password,
@@ -110,23 +109,13 @@ class Database
         }
     }
 
-    public function getId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function __toString()
-    {
-        return $this->id;
-    }
-
-    public function getUserReservation(string $idCustomer,  string $table)
+    public function getUserReservation(string $idCustomer,  string $table, $id)
     {
         $statement = $this->connection->prepare(
             "SELECT * FROM $table WHERE id = :id"
             );
         $statement->execute([
-            ':id' => $this->id
+            ':id' => $id
             ]);
         while($row = $statement->fetch())
         {
@@ -147,67 +136,20 @@ class Database
             while($row = $statement->fetch())
             {
                 echo '<form action="ReserveringAuto.php" method ="POST">
-                        <input type="text" name="Name" placeholder="Naam" value=' . $row['name'] . 'required="required"><br><br>
-                        <input type="email" name="Email" placeholder="Email" value=' . $row['email'] . 'required="required"><br><br>
+                        <input type="text" name="Name" placeholder="Naam" value=' . $row['name'] . ' required="required"><br><br>
+                        <input type="email" name="Email" placeholder="Email" value=' . $row['email'] . ' required="required"><br><br>
 
                         <input type="submit" value="Reserveer">
                     </form>';
-                if(isset($_POST['submit']))
+
+                if (isset($_POST['submit']))
                 {
-                    if (isset($_POST['Name'], $_POST['Name']))
+                    if (isset($_POST['Name'], $_POST['Email']))
                     {
                         header('Location: Bon.php');
                     }
                 }
             }
         }
-    }
-
-    public function getUsername(string $name)
-    {
-        $statement = $this->connection->prepare(
-            "SELECT users.name FROM $this->table INNER JOIN users ON $this->table.customer_id = users.id WHERE users.name = :name)"
-            );
-        $statement->execute([
-            ':name' => $name
-            ]);
-        while($row = $statement->fetch())
-        {
-            echo "
-            <div>
-                <h2>Bon van Reservering</h2>
-                <ul class='informatie'>
-                    <li>" . $row['name'] . "</li>
-                </ul>
-            </div>";
-        }
-    }
-
-    public function getCarDetails(int $car)
-    {
-        $statement = $this->connection->prepare(
-            "SELECT cars.brand, cars.year_of_production, cars.model FROM $this->table INNER JOIN cars ON $this->table.cars_id = cars.id WHERE cars.id = :car)"
-            );
-        $statement->execute([
-            ':car' => $car
-            ]);
-        while($row = $statement->fetch())
-        {
-            echo "
-            <div>
-                <h2>Bon van Reservering</h2>
-                <ul class='informatie'>
-                    <li>" . $row['brand'] . "</li>
-                    <li>" . $row['year_of_production'] . "</li>
-                    <li>" . $row['model'] . "</li>
-                </ul>
-            </div>";
-        }
-    }
-
-    public function getReceipt($name, $car)
-    {
-        $this->getUsername($name);
-        $this->getCarDetails($car);
     }
 }

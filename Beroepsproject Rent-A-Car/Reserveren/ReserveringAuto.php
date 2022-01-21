@@ -13,8 +13,21 @@
     <body>
         <?php
         $getLayout->getNavbarHead();
-        $database->getId($_GET['id']);
-        $database->getUserReservation($_SESSION['user'], 'cars');
+        try
+        {
+            if ($_SESSION['user'] != null)
+            {
+                $database->getUserReservation($_SESSION['user'], 'cars', $_GET['id']);
+            }
+            else
+            {
+                throw new Exception("U bent niet ingelogd!");
+            }
+        }
+        catch (Exception $ex)
+        {
+            echo $ex->getMessage() . "<br/>";
+        }
         $getLayout->getNavbarFoot();
         ?>
     </body>
